@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
-
-namespace Mango.Services.AuthAPI.Models.Dto;
+﻿namespace Mango.Services.AuthAPI.Models.Dto;
 
 public class RegistrationRequestDto
 {

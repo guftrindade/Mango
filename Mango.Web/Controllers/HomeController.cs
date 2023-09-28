@@ -1,70 +1,68 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
-using Mango.Web.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
-namespace Mango.Web.Controllers
+namespace Mango.Web.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly IProductService _productService;
+
+    public HomeController(ILogger<HomeController> logger, IProductService productService)
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IProductService _productService;
+        _logger = logger;
+        _productService = productService;
+    }
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+    public async Task<IActionResult> Index()
+    {
+        List<ProductDto>? list = new();
+
+        ResponseDto? response = await _productService.GetAllProductsAsync();
+
+        if (response != null && response.IsSuccess)
         {
-            _logger = logger;
-            _productService = productService;
+            list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
+        }
+        else
+        {
+            TempData["error"] = response?.Message;
         }
 
-        public async Task<IActionResult> Index()
+        return View(list);
+    }
+
+    [Authorize]
+    public async Task<IActionResult> ProductDetails(int productId)
+    {
+        ProductDto? model = new();
+
+        ResponseDto? response = await _productService.GetProductByIdAsync(productId);
+
+        if (response != null && response.IsSuccess)
         {
-            List<ProductDto>? list = new();
-
-            ResponseDto? response = await _productService.GetAllProductsAsync();
-
-            if (response != null && response.IsSuccess)
-            {
-                list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
-            }
-            else
-            {
-                TempData["error"] = response?.Message;
-            }
-
-            return View(list);
+            model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+        }
+        else
+        {
+            TempData["error"] = response?.Message;
         }
 
-        [Authorize]
-        public async Task<IActionResult> ProductDetails(int productId)
-        {
-            ProductDto? model = new();
+        return View(model);
+    }
 
-            ResponseDto? response = await _productService.GetProductByIdAsync(productId);
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-            if (response != null && response.IsSuccess)
-            {
-                model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
-            }
-            else
-            {
-                TempData["error"] = response?.Message;
-            }
-
-            return View(model);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

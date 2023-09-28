@@ -3,7 +3,6 @@ using Mango.Services.AuthAPI.Models;
 using Mango.Services.AuthAPI.Models.Dto;
 using Mango.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Win32;
 
 namespace Mango.Services.AuthAPI.Service
 {

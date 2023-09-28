@@ -26,7 +26,8 @@
                                 </div>
                             </div>
                             <div class="row mx-0">
-                                <input class="form-control" />
+                                <input asp-for="Count" class="form-control" />
+                                <span asp-validation-for="Count" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -43,3 +44,7 @@
         </div>
     </div>
 </form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
