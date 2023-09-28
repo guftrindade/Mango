@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.AuthAPI", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.ProductAPI", "Mango.Services.ProductAPI\Mango.Services.ProductAPI.csproj", "{C7BF7679-1BE3-4364-AB0D-32F4F7E31B7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.ShoppingCardAPI", "Mango.Services.ShoppingCardAPI\Mango.Services.ShoppingCardAPI.csproj", "{09CCD48C-ED11-4CE8-AFA0-9CE73FD75575}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.ShoppingCartAPI", "Mango.Services.ShoppingCartAPI\Mango.Services.ShoppingCartAPI.csproj", "{4AB1B0A8-4A26-46C5-8707-CFE1F506719B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{C7BF7679-1BE3-4364-AB0D-32F4F7E31B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7BF7679-1BE3-4364-AB0D-32F4F7E31B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7BF7679-1BE3-4364-AB0D-32F4F7E31B7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09CCD48C-ED11-4CE8-AFA0-9CE73FD75575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09CCD48C-ED11-4CE8-AFA0-9CE73FD75575}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09CCD48C-ED11-4CE8-AFA0-9CE73FD75575}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09CCD48C-ED11-4CE8-AFA0-9CE73FD75575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB1B0A8-4A26-46C5-8707-CFE1F506719B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB1B0A8-4A26-46C5-8707-CFE1F506719B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB1B0A8-4A26-46C5-8707-CFE1F506719B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB1B0A8-4A26-46C5-8707-CFE1F506719B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,7 +56,7 @@ Global
 		{404850DB-4C49-46C5-99A2-D4E188D9CA10} = {820FECFC-DDD7-4F87-A65D-78F300695810}
 		{04292447-73F3-4115-B87C-2A7858C1DA66} = {27B0CF46-DC31-4AC4-B78F-A0C9EC72AC63}
 		{C7BF7679-1BE3-4364-AB0D-32F4F7E31B7C} = {27B0CF46-DC31-4AC4-B78F-A0C9EC72AC63}
-		{09CCD48C-ED11-4CE8-AFA0-9CE73FD75575} = {27B0CF46-DC31-4AC4-B78F-A0C9EC72AC63}
+		{4AB1B0A8-4A26-46C5-8707-CFE1F506719B} = {27B0CF46-DC31-4AC4-B78F-A0C9EC72AC63}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13FBA33E-54B8-497A-BC0F-09611F2558A9}
