@@ -1,4 +1,4 @@
-﻿namespace Mango.Services.ShoppingCartAPI.Models.Dto;
+﻿namespace Mango.Web.Models;
 
 public class CartDetailsDto
 {
@@ -8,7 +8,7 @@ public class CartDetailsDto
     public CartHeaderDto? CartHeader { get; set; }
 
     public int ProductId { get; set; }
-    public ProductDto? Product { get; set; }
+    public ProductDto Product { get; set; }
 
     public int Count { get; set; }
 }
