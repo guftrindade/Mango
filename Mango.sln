@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.ShoppingCart
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.MessageBus", "Mango.MessageBus\Mango.MessageBus.csproj", "{89EB00DA-D26A-4D48-8238-37596781E9A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Service.EmailAPI", "Mango.Service.EmailAPI\Mango.Service.EmailAPI.csproj", "{2A24E86F-7CAF-4C82-A778-FB0D3F132C10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Service.EmailAPI", "Mango.Service.EmailAPI\Mango.Service.EmailAPI.csproj", "{2A24E86F-7CAF-4C82-A778-FB0D3F132C10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Service.OrderAPI", "Mango.Service.OrderAPI\Mango.Service.OrderAPI.csproj", "{BA0187D6-3C0A-4403-900F-6B796FCD0068}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{2A24E86F-7CAF-4C82-A778-FB0D3F132C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A24E86F-7CAF-4C82-A778-FB0D3F132C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A24E86F-7CAF-4C82-A778-FB0D3F132C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0187D6-3C0A-4403-900F-6B796FCD0068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0187D6-3C0A-4403-900F-6B796FCD0068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0187D6-3C0A-4403-900F-6B796FCD0068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0187D6-3C0A-4403-900F-6B796FCD0068}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{4AB1B0A8-4A26-46C5-8707-CFE1F506719B} = {27B0CF46-DC31-4AC4-B78F-A0C9EC72AC63}
 		{89EB00DA-D26A-4D48-8238-37596781E9A5} = {171FD990-2F7B-4DE0-85E0-5C8A22059686}
 		{2A24E86F-7CAF-4C82-A778-FB0D3F132C10} = {27B0CF46-DC31-4AC4-B78F-A0C9EC72AC63}
+		{BA0187D6-3C0A-4403-900F-6B796FCD0068} = {27B0CF46-DC31-4AC4-B78F-A0C9EC72AC63}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13FBA33E-54B8-497A-BC0F-09611F2558A9}
