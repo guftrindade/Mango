@@ -6,7 +6,7 @@ namespace Mango.MessageBus;
 
 public class MessageBus : IMessageBus
 {
-    private string connectionString = "";
+    private readonly string connectionString = "";
 
     public async Task PublishMessage(object message, string topic_queue_Name)
     {
@@ -16,7 +16,7 @@ public class MessageBus : IMessageBus
 
         var jsonMessage = JsonConvert.SerializeObject(message);
 
-        ServiceBusMessage finalMessage = new ServiceBusMessage(Encoding.UTF8.GetBytes(jsonMessage))
+        ServiceBusMessage finalMessage = new(Encoding.UTF8.GetBytes(jsonMessage))
         {
             CorrelationId = Guid.NewGuid().ToString(),
         };
