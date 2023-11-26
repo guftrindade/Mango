@@ -22,7 +22,7 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
         _configuration = configuration;
         _emailService = emailService;
 
-        serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
+        serviceBusConnectionString = _configuration.GetValue<string>("ServiceBus:ConnectionString");
 
         emailCartQueue = _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue");
         registerUserQueue = _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue");
