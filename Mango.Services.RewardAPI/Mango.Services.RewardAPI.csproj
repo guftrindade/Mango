@@ -2,9 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>63a3a3ea-c115-4e78-9479-e04cde8d51e9</UserSecretsId>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -21,10 +20,6 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Stripe.net" Version="43.1.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Mango.MessageBus\Mango.MessageBus.csproj" />
 	</ItemGroup>
 
 </Project>
