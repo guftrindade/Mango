@@ -1,4 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
+using Mango.Service.EmailAPI.Message;
 using Mango.Service.EmailAPI.Models.Dto;
 using Mango.Service.EmailAPI.Service;
 using Newtonsoft.Json;
@@ -8,12 +9,16 @@ namespace Mango.Service.EmailAPI.Messaging;
 
 public class AzureServiceBusConsumer : IAzureServiceBusConsumer
 {
+    private readonly string orderCreated_Topic;
+    private readonly string orderCreated_Email_Subscription;
     private readonly string serviceBusConnectionString;
     private readonly string emailCartQueue;
     private readonly string registerUserQueue;
+
     private readonly IConfiguration _configuration;
     private readonly EmailService _emailService;
 
+    private ServiceBusProcessor _emailOrderPlacedProcessor;
     private ServiceBusProcessor _emailCartProcessor;
     private ServiceBusProcessor _registerUserProcessor;
 
@@ -26,11 +31,15 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
 
         emailCartQueue = _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue");
         registerUserQueue = _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue");
+        orderCreated_Topic = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
+        orderCreated_Email_Subscription = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreated_Email_Subscription");
 
         var client = new ServiceBusClient(serviceBusConnectionString);
+
         _emailCartProcessor = client.CreateProcessor(emailCartQueue);
         _registerUserProcessor = client.CreateProcessor(registerUserQueue);
-            
+        _emailOrderPlacedProcessor = client.CreateProcessor(orderCreated_Topic, orderCreated_Email_Subscription);
+
     }
 
     public async Task Start()
@@ -42,6 +51,10 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
         _registerUserProcessor.ProcessMessageAsync += OnUserRegisterRequestReceived;
         _registerUserProcessor.ProcessErrorAsync += ErrorHandler;
         await _registerUserProcessor.StartProcessingAsync();
+
+        _emailOrderPlacedProcessor.ProcessMessageAsync += OnOrderPlacedRequestReceived;
+        _emailOrderPlacedProcessor.ProcessErrorAsync += ErrorHandler;
+        await _emailOrderPlacedProcessor.StartProcessingAsync();
     }
 
     public async Task Stop()
@@ -51,6 +64,9 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
 
         await _registerUserProcessor.StopProcessingAsync();
         await _registerUserProcessor.DisposeAsync();
+
+        await _emailOrderPlacedProcessor.StopProcessingAsync();
+        await _emailOrderPlacedProcessor.DisposeAsync();
     }
 
     private async Task OnUserRegisterRequestReceived(ProcessMessageEventArgs args)
@@ -89,11 +105,26 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
         }
     }
 
+    private async Task OnOrderPlacedRequestReceived(ProcessMessageEventArgs args)
+    {
+        var message = args.Message;
+        var body = Encoding.UTF8.GetString(message.Body);
+
+        RewardsMessage objMessage = JsonConvert.DeserializeObject<RewardsMessage>(body);
+        try
+        {
+            await _emailService.LogOrderPlaced(objMessage);
+            await args.CompleteMessageAsync(args.Message);
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+    }
+
     private Task ErrorHandler(ProcessErrorEventArgs args)
     {
         Console.WriteLine(args.Exception.ToString());
         return Task.CompletedTask;
     }
-
-
 }

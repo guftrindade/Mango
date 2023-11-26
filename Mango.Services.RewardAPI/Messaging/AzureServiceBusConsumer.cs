@@ -13,11 +13,11 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
     private readonly string orderCreatedRewardsSubscription;
 
     private readonly IConfiguration _configuration;
-    private readonly IRewardService _rewardService;
+    private readonly RewardService _rewardService;
 
     private ServiceBusProcessor _rewardProcessor;
 
-    public AzureServiceBusConsumer(IConfiguration configuration, IRewardService rewardService)
+    public AzureServiceBusConsumer(IConfiguration configuration, RewardService rewardService)
     {
         _configuration = configuration;
         _rewardService = rewardService;
