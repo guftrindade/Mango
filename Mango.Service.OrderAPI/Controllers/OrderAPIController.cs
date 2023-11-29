@@ -35,7 +35,7 @@ public class OrderAPIController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("GetOrders")]
+    [HttpGet("GetOrders")]
     public ResponseDto? Get(string? userId = "")
     {
         try
@@ -63,7 +63,7 @@ public class OrderAPIController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("GetOrder/{id:int}")]
+    [HttpGet("GetOrder/{id:int}")]
     public ResponseDto? Get(int id)
     {
         try

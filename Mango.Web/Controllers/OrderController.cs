@@ -35,7 +35,7 @@ public class OrderController : Controller
 
         ResponseDto response = _orderService.GetAllOrder(userId).GetAwaiter().GetResult();
 
-        if (response != null && response.IsSuccess)
+		if (response != null && response.IsSuccess)
         {
             list = JsonConvert.DeserializeObject<List<OrderHeaderDto>>(Convert.ToString(response.Result));
         }
@@ -43,6 +43,7 @@ public class OrderController : Controller
         {
             list = new List<OrderHeaderDto>();
         }
+
         return Json(new { data = list });
     }
 }
