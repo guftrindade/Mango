@@ -79,23 +79,19 @@ public class OrderController : Controller
         return View();
     }
 
-    [HttpGet]
-    public IActionResult GetAll(string status)
-    {
-        IEnumerable<OrderHeaderDto> list;
-        string userId = "";
-
-        if (!User.IsInRole(SD.RoleAdmin))
-        {
-            userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
-        }
-
-        ResponseDto response = _orderService.GetAllOrder(userId).GetAwaiter().GetResult();
-
+	[HttpGet]
+	public IActionResult GetAll(string status)
+	{
+		IEnumerable<OrderHeaderDto> list;
+		string userId = "";
+		if (!User.IsInRole(SD.RoleAdmin))
+		{
+			userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
+		}
+		ResponseDto response = _orderService.GetAllOrder(userId).GetAwaiter().GetResult();
 		if (response != null && response.IsSuccess)
-        {
-            list = JsonConvert.DeserializeObject<List<OrderHeaderDto>>(Convert.ToString(response.Result));
-
+		{
+			list = JsonConvert.DeserializeObject<List<OrderHeaderDto>>(Convert.ToString(response.Result));
 			switch (status)
 			{
 				case "approved":
@@ -111,11 +107,10 @@ public class OrderController : Controller
 					break;
 			}
 		}
-        else
-        {
-            list = new List<OrderHeaderDto>();
-        }
-
-        return Json(new { data = list });
-    }
+		else
+		{
+			list = new List<OrderHeaderDto>();
+		}
+		return Json(new { data = list.OrderByDescending(u => u.OrderHeaderId) });
+	}
 }
