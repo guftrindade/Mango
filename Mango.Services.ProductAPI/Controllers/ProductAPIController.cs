@@ -58,7 +58,7 @@ public class ProductAPIController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "ADMIN")]
-    public ResponseDto Post([FromBody] ProductDto productDto)
+    public ResponseDto Post([FromForm] ProductDto productDto)
     {
         try
         {
