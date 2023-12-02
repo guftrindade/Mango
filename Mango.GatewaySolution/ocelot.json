@@ -187,7 +187,7 @@
           "Port": 7004
         }
       ],
-      "UpstreamPathTemplate": "/api/order/GetOrders/{id}",
+      "UpstreamPathTemplate": "/api/order/GetOrders?userId={id}",
       "UpstreamHttpMethod": [ "Get" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"
