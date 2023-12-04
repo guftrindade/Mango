@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Mango.Service.EmailAPI.Data;
 using Mango.Service.EmailAPI.Messaging;
 using Mango.Service.EmailAPI.Extension;
-using Microsoft.Extensions.Options;
 using Mango.Service.EmailAPI.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,12 +25,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    if (!app.Environment.IsDevelopment())
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "CART API");
+        c.RoutePrefix = string.Empty;
+    }
+});
 
 app.UseHttpsRedirection();
 
