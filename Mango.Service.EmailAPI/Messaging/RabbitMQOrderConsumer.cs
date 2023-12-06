@@ -13,13 +13,15 @@ public class RabbitMQOrderConsumer : BackgroundService
     private readonly IConfiguration _configuration;
     private readonly EmailService _emailService;
     private IConnection _connection;
+    private string ExchangeName = "";
+    private const string OrderCreated_EmailUpdateQueue = "EmailUpdateQueue";
     private IModel _channel;
-    string queueName = "";
 
     public RabbitMQOrderConsumer(IConfiguration configuration, EmailService emailService)
     {
         _configuration = configuration;
         _emailService = emailService;
+        ExchangeName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
 
         var factory = new ConnectionFactory
         {
@@ -30,9 +32,10 @@ public class RabbitMQOrderConsumer : BackgroundService
 
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
-        _channel.ExchangeDeclare(_configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic"),ExchangeType.Fanout);
-        queueName = _channel.QueueDeclare().QueueName;
-        _channel.QueueBind(queueName, _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic"), "");
+        _channel.ExchangeDeclare(ExchangeName, ExchangeType.Direct);
+
+        _channel.QueueDeclare(OrderCreated_EmailUpdateQueue, false, false, false, null);
+        _channel.QueueBind(OrderCreated_EmailUpdateQueue, ExchangeName, "EmailUpdate");
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -49,7 +52,7 @@ public class RabbitMQOrderConsumer : BackgroundService
             _channel.BasicAck(ea.DeliveryTag, false);
         };
 
-        _channel.BasicConsume(queueName, false, consumer);
+        _channel.BasicConsume(OrderCreated_EmailUpdateQueue, false, consumer);
 
         return Task.CompletedTask;
     }
