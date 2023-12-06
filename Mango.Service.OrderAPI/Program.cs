@@ -3,6 +3,7 @@ using Mango.MessageBus;
 using Mango.Service.OrderAPI;
 using Mango.Service.OrderAPI.Data;
 using Mango.Service.OrderAPI.Extensions;
+using Mango.Service.OrderAPI.RabbitMQSender;
 using Mango.Service.OrderAPI.Service;
 using Mango.Service.OrderAPI.Service.IService;
 using Mango.Service.OrderAPI.Utility;
@@ -26,7 +27,7 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
