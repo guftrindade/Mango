@@ -32,6 +32,7 @@ public class RewardService : IRewardService
         }
         catch (Exception ex)
         {
+            //comentário teste
         }
     }
 }
